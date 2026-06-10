@@ -1,0 +1,37 @@
+# Maven build output
+target/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# Test reports (generated, not committed)
+test-output/
+reports/
+allure-results/
+screenshots/
+
+# Local config (secrets, environment-specific overrides)
+*.local.properties
+.env
+
+# Selenium driver binaries (auto-managed by WebDriverManager)
+chromedriver
+chromedriver.exe
+geckodriver
+geckodriver.exe
