@@ -44,7 +44,7 @@ A hybrid BDD test automation framework built to demonstrate end-to-end SDET capa
 - [x] Folder structure for hybrid framework
 - [x] Initial Git repository and GitHub integration
 - [x] First Selenium + TestNG smoke test
-- [ ] Page Object Model layer
+- [x] Page Object Model layer
 - [ ] Cucumber BDD layer with feature files
 - [ ] REST Assured API tests
 - [ ] JDBC database testing layer
