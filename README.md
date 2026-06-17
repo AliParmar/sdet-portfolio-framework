@@ -47,7 +47,7 @@ A hybrid BDD test automation framework built to demonstrate end-to-end SDET capa
 - [x] Page Object Model layer
 - [x] Cucumber BDD layer with feature files
 - [x] REST Assured API tests
-- [ ] JDBC database testing layer
+- [x] JDBC database testing layer
 - [ ] HTML reporting (ExtentReports)
 - [ ] Jira + Xray integration
 - [ ] CI/CD pipeline (GitHub Actions + Jenkinsfile)
