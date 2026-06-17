@@ -48,7 +48,7 @@ A hybrid BDD test automation framework built to demonstrate end-to-end SDET capa
 - [x] Cucumber BDD layer with feature files
 - [x] REST Assured API tests
 - [x] JDBC database testing layer
-- [ ] HTML reporting (ExtentReports)
+- [x] HTML reporting (ExtentReports)
 - [ ] CI/CD pipeline (GitHub Actions + Jenkinsfile)
 - [ ] Test suite profiles (smoke / sanity / regression)
 - [ ] Polished documentation with screenshots

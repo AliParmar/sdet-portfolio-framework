@@ -1,5 +1,8 @@
 package com.aliparmar.sdet.db;
 
+import com.aliparmar.sdet.utils.ExtentTestListener;
+import org.testng.annotations.Listeners;
+
 import com.aliparmar.sdet.base.BaseDbTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,6 +16,7 @@ import java.sql.SQLException;
  * JDBC tests against the seeded SQLite demo database.
  * Demonstrates connection handling, parameterized queries, and result-set assertions.
  */
+@Listeners(ExtentTestListener.class)
 public class ParaBankDbTest extends BaseDbTest {
 
     @Test(groups = {"smoke", "db"}, description = "Customer 12212 has the expected number of accounts")
