@@ -1,8 +1,5 @@
 package com.aliparmar.sdet.api;
 
-import com.aliparmar.sdet.utils.ExtentTestListener;
-import org.testng.annotations.Listeners;
-
 import com.aliparmar.sdet.base.BaseApiTest;
 import com.aliparmar.sdet.utils.ConfigReader;
 import org.testng.annotations.Test;
@@ -16,7 +13,7 @@ import static org.hamcrest.Matchers.notNullValue;
  * Verifies the API is reachable and core endpoints return expected data.
  * Paths verified against the ParaBank service interface (parasoft/parabank on GitHub).
  */
-@Listeners(ExtentTestListener.class)
+
 public class ParaBankApiSmokeTest extends BaseApiTest {
 
     private static final String CUSTOMER_ID = "12212";

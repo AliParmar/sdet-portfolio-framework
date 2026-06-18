@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke Suite" verbose="1">
+
+    <!-- Attach the ExtentReports listener once for the whole suite. -->
+    <listeners>
+        <listener class-name="com.aliparmar.sdet.utils.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Smoke Tests">
+        <!-- Run only tests tagged with the 'smoke' group. -->
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.aliparmar.sdet.tests.ParaBankSmokeTest"/>
+            <class name="com.aliparmar.sdet.api.ParaBankApiSmokeTest"/>
+            <class name="com.aliparmar.sdet.db.ParaBankDbTest"/>
+        </classes>
+    </test>
+
+</suite>
