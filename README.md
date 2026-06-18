@@ -49,7 +49,7 @@ A hybrid BDD test automation framework built to demonstrate end-to-end SDET capa
 - [x] REST Assured API tests
 - [x] JDBC database testing layer
 - [x] HTML reporting (ExtentReports)
-- [ ] CI/CD pipeline (GitHub Actions + Jenkinsfile)
+- [x] CI/CD pipeline (GitHub Actions + Jenkinsfile)
 - [x] Test suite profiles (smoke / sanity / regression)
 - [ ] Polished documentation with screenshots
 
