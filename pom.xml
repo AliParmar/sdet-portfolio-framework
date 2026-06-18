@@ -33,6 +33,9 @@
     <!-- Plugin versions -->
     <surefire.version>3.5.2</surefire.version>
     <compiler.plugin.version>3.13.0</compiler.plugin.version>
+
+    <!-- Configuring Test Suits -->
+    <suite>regression</suite>
   </properties>
 
   <dependencies>
@@ -137,7 +140,7 @@
         <version>${surefire.version}</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>src/test/resources/testng-suites/regression.xml</suiteXmlFile>
+            <suiteXmlFile>src/test/resources/testng-suites/${suite}.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
