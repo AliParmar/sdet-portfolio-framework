@@ -1,6 +1,6 @@
 # SDET Portfolio Framework
 
-A hybrid BDD test automation framework demonstrating end-to-end SDET capabilities across UI, API, and database layers — built and run against a real public banking application.
+A hybrid BDD test automation framework demonstrating end-to-end SDET capabilities across UI, API, and database layers — covering happy-path, negative-case, and data-integrity scenarios — built and run against a real public banking application.
 
 ## Architecture
 
@@ -72,6 +72,7 @@ UI tests are excluded from CI for now since they require a configured headless C
 - **JDBC layer uses SQLite, not a hosted database.** This keeps the demo fully self-contained and runnable by anyone who clones the repo — same connection-and-query pattern you'd use against MySQL or Postgres, just a different connection string.
 - **Jira/Xray integration was considered and deliberately excluded.** It requires a paid plugin and there's no way to demo a real integration without one, so including it would test tool-specific trivia rather than a transferable skill.
 - **Suite profiles are switched via a Maven property (`-Dsuite`), not hardcoded.** This lets one `pom.xml` serve smoke, sanity, CI, and full regression runs without duplicated Surefire configuration.
+- **API tests extract IDs dynamically rather than hardcoding them.** ParaBank's public demo dataset is shared and resets periodically, so a hardcoded account ID is fragile. Tests instead query for a customer's accounts first and chain the returned ID into the next request — the same pattern used against real, frequently-changing production data.
 
 ## Author
 
