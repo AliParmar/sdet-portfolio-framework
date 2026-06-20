@@ -5,6 +5,7 @@ import com.aliparmar.sdet.utils.ConfigReader;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -38,7 +39,8 @@ public class ParaBankApiSmokeTest extends BaseApiTest {
                 .get("/customers/" + CUSTOMER_ID + "/accounts")
                 .then()
                 .statusCode(200)
-                .body("size()", notNullValue());
+                .body("size()", notNullValue())
+                .body(matchesJsonSchemaInClasspath("schemas/account-schema.json"));
     }
 
     @Test(groups = {"sanity", "api"}, description = "Login endpoint rejects invalid credentials")
