@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Smoke tests for the ParaBank REST API.
@@ -51,4 +50,35 @@ public class ParaBankApiSmokeTest extends BaseApiTest {
                 .then()
                 .statusCode(equalTo(400));
     }
+    @Test(groups = {"smoke", "api"}, description = "Transactions endpoint returns data for a dynamically retrieved account")
+    public void verifyAccountTransactionsEndpoint() {
+
+        // Step 1: get the accounts list for customer 12212, extract the first account's id
+        int accountId = given()
+                .when()
+                .get("/customers/" + CUSTOMER_ID + "/accounts")
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("[0].id");
+
+        // Step 2: use that account id to fetch its transactions
+        given()
+                .when()
+                .get("/accounts/" + accountId + "/transactions")
+                .then()
+                .statusCode(200)
+                .body("size()", notNullValue());
+    }
+
+    @Test(groups = {"sanity", "api"}, description = "Accounts endpoint rejects a nonexistent customer id")
+    public void verifyInvalidCustomerIdIsRejected() {
+        given()
+                .when()
+                .get("/customers/99999999/accounts")
+                .then()
+                .statusCode(400)
+                .body(containsString("Could not find customer #99999999"));
+    }
+
 }
