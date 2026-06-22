@@ -14,8 +14,6 @@
   <description>Hybrid BDD test automation framework with Java, Selenium, TestNG, Cucumber, REST Assured, JDBC, and CI/CD</description>
 
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Dependency versions (centralized for easy upgrades) -->
@@ -81,13 +79,6 @@
       <version>${rest-assured.version}</version>
     </dependency>
 
-    <!-- ===== JSON Handling ===== -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-
     <!-- ===== Database Testing (JDBC) ===== -->
     <dependency>
       <groupId>org.xerial</groupId>
@@ -122,8 +113,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${compiler.plugin.version}</version>
         <configuration>
-          <source>21</source>
-          <target>21</target>
+          <release>21</release>
         </configuration>
       </plugin>
       <plugin>
