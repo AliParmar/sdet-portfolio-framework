@@ -26,7 +26,6 @@
     <jackson.version>2.18.2</jackson.version>
     <sqlite-jdbc.version>3.47.1.0</sqlite-jdbc.version>
     <slf4j.version>2.0.16</slf4j.version>
-    <commons-io.version>2.18.0</commons-io.version>
     <webdrivermanager.version>6.1.0</webdrivermanager.version>
     <extentreports.version>5.1.2</extentreports.version>
 
@@ -113,13 +112,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j.version}</version>
-    </dependency>
-
-    <!-- ===== Utilities ===== -->
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons-io.version}</version>
     </dependency>
   </dependencies>
 
