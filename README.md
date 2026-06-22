@@ -4,7 +4,7 @@ A hybrid BDD test automation framework demonstrating end-to-end SDET capabilitie
 
 ## Architecture
 
-![Architecture Diagram](docs/architecture_diagram.png)
+![Architecture Diagram](docs/architecture-diagram.png)
 
 *Five-layer execution flow: Test Sources → Glue → Action → Utilities → Application Under Test (ParaBank).*
 
