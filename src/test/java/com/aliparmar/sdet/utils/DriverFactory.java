@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import java.time.Duration;
 
@@ -19,6 +21,7 @@ public class DriverFactory {
 
         WebDriver driver = switch (browser) {
             case "chrome" -> createChromeDriver(headless);
+            case "edge" -> createEdgeDriver(headless);
             default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
         };
 
@@ -42,5 +45,14 @@ public class DriverFactory {
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         return new ChromeDriver(options);
+    }
+
+    private static WebDriver createEdgeDriver(boolean headless) {
+        WebDriverManager.edgedriver().setup();
+        EdgeOptions options = new EdgeOptions();
+        if (ConfigReader.getBoolean("headless")) {
+            options.addArguments("--headless=new");
+        }
+        return new EdgeDriver(options);
     }
 }

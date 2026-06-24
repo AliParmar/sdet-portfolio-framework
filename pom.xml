@@ -24,7 +24,8 @@
     <jackson.version>2.18.2</jackson.version>
     <sqlite-jdbc.version>3.47.1.0</sqlite-jdbc.version>
     <slf4j.version>2.0.16</slf4j.version>
-    <webdrivermanager.version>6.1.0</webdrivermanager.version>
+    <webdrivermanager.version>6.3.4</webdrivermanager.version>
+    <edge.version>4.27.0</edge.version>
     <extentreports.version>5.1.2</extentreports.version>
 
     <!-- Plugin versions -->
@@ -46,6 +47,12 @@
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>${webdrivermanager.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-edge-driver</artifactId>
+      <version>${edge.version}</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- ===== Test Runners ===== -->
@@ -128,4 +135,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>
