@@ -22,6 +22,10 @@ public class ConfigReader {
     }
 
     public static String get(String key) {
+        String systemValue = System.getProperty(key);
+        if (systemValue != null) {
+            return systemValue;
+        }
         String value = properties.getProperty(key);
         if (value == null) {
             throw new RuntimeException("Missing config key: " + key);
