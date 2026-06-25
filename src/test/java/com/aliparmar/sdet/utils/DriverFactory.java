@@ -50,9 +50,11 @@ public class DriverFactory {
     private static WebDriver createEdgeDriver(boolean headless) {
         WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
-        if (ConfigReader.getBoolean("headless")) {
+        if (headless) {
             options.addArguments("--headless=new");
         }
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
         return new EdgeDriver(options);
     }
 }
