@@ -1,5 +1,6 @@
 # SDET Portfolio Framework
 
+![CI](https://github.com/AliParmar/sdet-portfolio-framework/actions/workflows/ci.yml/badge.svg)
 A hybrid BDD test automation framework demonstrating end-to-end SDET capabilities across UI, API, and database layers — covering happy-path, negative-case, and data-integrity scenarios — built and run against a real public banking application.
 
 ## Architecture
