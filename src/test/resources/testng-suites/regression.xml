@@ -10,9 +10,16 @@
     <test name="Full Regression">
         <!-- No group filter: runs every test in the listed classes. -->
         <classes>
-            <class name="com.aliparmar.sdet.tests.ParaBankSmokeTest"/>
+            <class name="com.aliparmar.sdet.ui.ParaBankSmokeTest"/>
             <class name="com.aliparmar.sdet.api.ParaBankApiSmokeTest"/>
             <class name="com.aliparmar.sdet.db.ParaBankDbTest"/>
+        </classes>
+    </test>
+
+    <test name="BDD Scenarios">
+        <!-- Runs the Cucumber feature files through the TestNG bridge. -->
+        <classes>
+            <class name="com.aliparmar.sdet.runners.CucumberTestRunner"/>
         </classes>
     </test>
 
