@@ -7,7 +7,7 @@
     "properties": {
       "id": { "type": "integer" },
       "customerId": { "type": "integer" },
-      "type": { "type": "string", "enum": ["CHECKING", "SAVINGS"] },
+      "type": { "type": "string", "enum": ["CHECKING", "SAVINGS", "LOAN"] },
       "balance": { "type": "number" }
     },
     "required": ["id", "customerId", "type", "balance"]
