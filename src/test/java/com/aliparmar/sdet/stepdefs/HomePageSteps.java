@@ -1,9 +1,7 @@
 package com.aliparmar.sdet.stepdefs;
 
 import com.aliparmar.sdet.pages.LoginPage;
-import com.aliparmar.sdet.utils.DriverFactory;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.aliparmar.sdet.utils.DriverContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
@@ -18,21 +16,10 @@ public class HomePageSteps {
     private WebDriver driver;
     private LoginPage loginPage;
 
-    @Before
-    public void setUp() {
-        driver = DriverFactory.createDriver();
-        loginPage = new LoginPage(driver);
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
     @Given("I open the ParaBank home page")
     public void i_open_the_parabank_home_page() {
+        driver = DriverContext.getDriver();
+        loginPage = new LoginPage(driver);
         loginPage.open();
     }
 

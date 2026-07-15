@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * Loads config.properties when class loads.
  * Provides simple getters so other framework classes can read config values.
- */
+*/
 public class ConfigReader {
 
     private static final Properties properties = new Properties();
@@ -28,7 +28,7 @@ public class ConfigReader {
         }
         String value = properties.getProperty(key);
         if (value == null) {
-            throw new RuntimeException("Missing config key: " + key);
+            throw new RuntimeException("Missing config key: " + key + "in the config.properties file");
         }
         return value;
     }
@@ -40,4 +40,5 @@ public class ConfigReader {
     public static boolean getBoolean(String key) {
         return Boolean.parseBoolean(get(key));
     }
+
 }

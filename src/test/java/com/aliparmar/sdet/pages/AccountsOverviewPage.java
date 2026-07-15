@@ -2,6 +2,7 @@ package com.aliparmar.sdet.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Page object for the post-login Accounts Overview page.
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class AccountsOverviewPage extends BasePage {
 
     private static final By ACCOUNT_TABLE = By.id("accountTable");
+    private static final By FIRST_ACCOUNT_LINK = By.xpath("//table[@id='accountTable']/tbody/tr[1]/td[1]/a");
 
     public AccountsOverviewPage(WebDriver driver) {
         super(driver);
@@ -21,5 +23,15 @@ public class AccountsOverviewPage extends BasePage {
 
     public boolean isAccountTableDisplayed() {
         return !driver.findElements(ACCOUNT_TABLE).isEmpty();
+    }
+
+    // Returns the account number shown in the first row of the account table.
+    public String getFirstAccountNumber() {
+        return driver.findElement(FIRST_ACCOUNT_LINK).getText();
+    }
+
+    // Clicks the first account number, which navigates to that account's Activity page.
+    public void openActivityForFirstAccount() {
+        driver.findElement(FIRST_ACCOUNT_LINK).click();
     }
 }
