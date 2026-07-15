@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="BDD Suite" verbose="1">
+
+    <!-- Runs only the Cucumber feature files, useful for demoing the BDD layer in isolation. -->
+    <listeners>
+        <listener class-name="com.aliparmar.sdet.utils.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Cucumber Scenarios">
+        <classes>
+            <class name="com.aliparmar.sdet.runners.CucumberTestRunner"/>
+        </classes>
+    </test>
+
+</suite>

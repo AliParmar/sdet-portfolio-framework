@@ -1,4 +1,4 @@
-package com.aliparmar.sdet.tests;
+package com.aliparmar.sdet.ui;
 
 import com.aliparmar.sdet.base.BaseTest;
 import com.aliparmar.sdet.pages.AccountsOverviewPage;
