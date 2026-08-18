@@ -1,5 +1,6 @@
 package com.aliparmar.sdet.stepdefs;
 
+import com.aliparmar.sdet.utils.ConfigReader;
 import com.aliparmar.sdet.pages.AccountActivityPage;
 import com.aliparmar.sdet.pages.AccountsOverviewPage;
 import com.aliparmar.sdet.pages.FindTransactionsPage;
@@ -23,9 +24,11 @@ public class FindTransactionsSteps {
     private WebDriver driver;
     private String transactionId;
 
-    @Given("I log in as {string} with password {string}")
-    public void i_log_in_as_with_password(String username, String password) {
+    @Given("I log in with valid credentials")
+    public void i_log_in_with_valid_credentials() {
         driver = DriverContext.getDriver();
+        String username = ConfigReader.get("test.username");
+        String password = ConfigReader.get("test.password");
         new LoginPage(driver).login(username, password);
     }
 

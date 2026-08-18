@@ -1,7 +1,7 @@
 package com.aliparmar.sdet.utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -11,13 +11,16 @@ import java.util.Properties;
 public class ConfigReader {
 
     private static final Properties properties = new Properties();
-    private static final String CONFIG_PATH = "src/test/resources/config/config.properties";
+    private static final String CONFIG_FILE = "config/config.properties";
 
     static {
-        try (FileInputStream input = new FileInputStream(CONFIG_PATH)) {
+        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
+            if (input == null) {
+                throw new RuntimeException("Could not find " + CONFIG_FILE + " on the classpath.");
+            }
             properties.load(input);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load config.properties from " + CONFIG_PATH, e);
+            throw new RuntimeException("Failed to load " + CONFIG_FILE, e);
         }
     }
 
@@ -28,7 +31,7 @@ public class ConfigReader {
         }
         String value = properties.getProperty(key);
         if (value == null) {
-            throw new RuntimeException("Missing config key: " + key + "in the config.properties file");
+            throw new RuntimeException("Missing config key: " + key + " in the config.properties file");
         }
         return value;
     }

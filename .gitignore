@@ -29,6 +29,7 @@ screenshots/
 # Local config (secrets, environment-specific overrides)
 *.local.properties
 .env
+src/test/resources/config/config.properties
 
 # Selenium driver binaries (auto-managed by WebDriverManager)
 chromedriver

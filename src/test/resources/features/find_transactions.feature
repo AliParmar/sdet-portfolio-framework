@@ -5,7 +5,7 @@ Feature: Find Transactions — verify last account transaction
 
   Background:
     Given I open the ParaBank home page
-    And I log in as "john" with password "demo"
+    And I log in with valid credentials
 
   @regression
   Scenario: Last transaction on the first account is found via Find Transactions
