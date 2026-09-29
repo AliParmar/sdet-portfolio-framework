@@ -30,6 +30,9 @@ jobs:
       - name: Run CI test suite
         run: mvn test -Dsuite=ci
 
+      - name: Prepare config.properties
+        run: cp src/test/resources/config/config.properties.example src/test/resources/config/config.properties
+
       - name: Upload ExtentReport
         if: always()
         uses: actions/upload-artifact@v4
