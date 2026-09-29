@@ -27,11 +27,11 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Run CI test suite
-        run: mvn test -Dsuite=ci
-
       - name: Prepare config.properties
         run: cp src/test/resources/config/config.properties.example src/test/resources/config/config.properties
+
+      - name: Run CI test suite
+        run: mvn test -Dsuite=ci
 
       - name: Upload ExtentReport
         if: always()
