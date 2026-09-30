@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-     - name: Prepare config.properties
+      - name: Prepare config.properties
         run: |
           cat <<EOF > src/test/resources/config/config.properties
           base.url=${{ secrets.PARABANK_BASE_URL }}
