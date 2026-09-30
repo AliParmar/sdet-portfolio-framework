@@ -29,6 +29,7 @@ jobs:
 
       - name: Prepare config.properties
         run: |
+          mkdir -p src/test/resources/config
           cat <<EOF > src/test/resources/config/config.properties
           base.url=${{ secrets.PARABANK_BASE_URL }}
           api.base.url=${{ secrets.PARABANK_API_BASE_URL }}
