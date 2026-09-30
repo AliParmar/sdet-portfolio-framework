@@ -11,6 +11,7 @@
         <!-- No group filter: runs every test in the listed classes. -->
         <classes>
             <class name="com.aliparmar.sdet.ui.ParaBankSmokeTest"/>
+            <class name="com.aliparmar.sdet.ui.ParaBankAccountServicesTest"/>
             <class name="com.aliparmar.sdet.api.ParaBankApiSmokeTest"/>
             <class name="com.aliparmar.sdet.db.ParaBankDbTest"/>
         </classes>
