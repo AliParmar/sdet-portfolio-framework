@@ -26,4 +26,11 @@ public class AccountActivityPage extends BasePage {
         WebElement lastRow = rows.getLast();
         lastRow.findElement(By.tagName("a")).click();
     }
+
+    // Returns how many transaction rows are currently displayed - used to
+    // confirm a freshly opened account starts with zero transactions.
+    public int getTransactionRowCount() {
+        waitForElementVisible(TRANSACTION_TABLE);
+        return driver.findElements(TRANSACTION_ROWS).size();
+    }
 }

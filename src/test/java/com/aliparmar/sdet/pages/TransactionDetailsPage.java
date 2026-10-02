@@ -3,10 +3,11 @@ package com.aliparmar.sdet.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+
 /**
  * Page object for the Transaction Details page.
  * This page has no element ids — values are read from the table cell
- * that follows each bolded label ("Transaction ID:", "Date:").
+ * that follows each bolded label ("Transaction ID:", "Date:", "Amount:").
  */
 public class TransactionDetailsPage extends BasePage {
 
@@ -14,6 +15,8 @@ public class TransactionDetailsPage extends BasePage {
             By.xpath("//td[b[text()='Transaction ID:']]/following-sibling::td[1]");
     private static final By TRANSACTION_DATE_VALUE =
             By.xpath("//td[b[text()='Date:']]/following-sibling::td[1]");
+    private static final By TRANSACTION_AMOUNT_VALUE =
+            By.xpath("//td[b[text()='Amount:']]/following-sibling::td[1]");
 
     public TransactionDetailsPage(WebDriver driver) {
         super(driver);
@@ -25,5 +28,11 @@ public class TransactionDetailsPage extends BasePage {
 
     public String getTransactionDate() {
         return waitForElementVisible(TRANSACTION_DATE_VALUE).getText();
+    }
+
+    // Returns the raw amount text (e.g. "$100.00") - used to drive the
+    // Find Transactions "by amount" search.
+    public String getAmount() {
+        return waitForElementVisible(TRANSACTION_AMOUNT_VALUE).getText();
     }
 }

@@ -13,6 +13,8 @@ public class FindTransactionsPage extends BasePage {
     private static final By FIND_TRANSACTIONS_MENU_LINK = By.linkText("Find Transactions");
     private static final By TRANSACTION_ID_INPUT = By.id("transactionId");
     private static final By FIND_BY_ID_BUTTON = By.id("findById");
+    private static final By AMOUNT_INPUT = By.id("amount");
+    private static final By FIND_BY_AMOUNT_BUTTON = By.id("findByAmount");
     private static final By RESULTS_TABLE = By.id("transactionTable");
 
     public FindTransactionsPage(WebDriver driver) {
@@ -30,6 +32,15 @@ public class FindTransactionsPage extends BasePage {
     public void searchByTransactionId(String transactionId) {
         waitForElementVisible(TRANSACTION_ID_INPUT).sendKeys(transactionId);
         waitForElementClickable(FIND_BY_ID_BUTTON).click();
+    }
+
+    // Enters an amount (e.g. "100.00", "$" stripped by the caller) and
+    // clicks the "Find Transactions" button for the Amount search section.
+    // NOTE: id="amount"/id="findByAmount" follow the same naming pattern as
+    // the ID search fields above - verify against the live DOM if this fails.
+    public void searchByAmount(String amount) {
+        waitForElementVisible(AMOUNT_INPUT).sendKeys(amount);
+        waitForElementClickable(FIND_BY_AMOUNT_BUTTON).click();
     }
 
     // Returns true if the results contain a link to the given transaction ID.
