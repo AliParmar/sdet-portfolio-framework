@@ -1,7 +1,9 @@
 package com.aliparmar.sdet.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.github.javafaker.*;
 
 
@@ -60,7 +62,12 @@ public class RegisterPage extends BasePage {
     }
 
     public boolean isRegistrationConfirmed() {
-        return getPanelText().contains("Welcome");
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(RIGHT_PANEL, "Welcome"));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
 }
