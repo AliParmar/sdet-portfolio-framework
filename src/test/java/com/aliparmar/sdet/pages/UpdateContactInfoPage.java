@@ -3,16 +3,15 @@ package com.aliparmar.sdet.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Page object for the Update Contact Info page.
- * NOTE: locators reflect ParaBank's documented field names.
- */
+
+
+// Page object for the Update Contact Info page.
+
 public class UpdateContactInfoPage extends BasePage {
 
     private static final By STREET_FIELD = By.id("customer.address.street");
     private static final By CITY_FIELD = By.id("customer.address.city");
     private static final By UPDATE_BUTTON = By.cssSelector("input[value='Update Profile']");
-    private static final By SUCCESS_MESSAGE = By.cssSelector("#updateProfileResult>h1");
 
     public UpdateContactInfoPage(WebDriver driver) {
         super(driver);
@@ -31,6 +30,6 @@ public class UpdateContactInfoPage extends BasePage {
     }
 
     public String getConfirmationText() {
-        return waitForElementVisible(SUCCESS_MESSAGE).getText();
+        return waitForElementVisible(By.cssSelector("#updateProfileResult>h1")).getText();
     }
 }

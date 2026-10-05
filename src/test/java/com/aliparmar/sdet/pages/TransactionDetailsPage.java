@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-/**
- * Page object for the Transaction Details page.
- * This page has no element ids — values are read from the table cell
- * that follows each bolded label ("Transaction ID:", "Date:", "Amount:").
+/*
+ Page object for the Transaction Details page.
+ This page has no element ids — values are read from the table cell
+ that follows each bolded label ("Transaction ID:", "Date:", "Amount:").
  */
 public class TransactionDetailsPage extends BasePage {
 

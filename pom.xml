@@ -22,6 +22,7 @@
     <cucumber.version>7.20.1</cucumber.version>
     <rest-assured.version>5.5.0</rest-assured.version>
     <sqlite-jdbc.version>3.47.1.0</sqlite-jdbc.version>
+    <javafaker.version>1.0.2</javafaker.version>
     <slf4j.version>2.0.16</slf4j.version>
     <webdrivermanager.version>6.3.4</webdrivermanager.version>
     <edge.version>4.27.0</edge.version>
@@ -92,11 +93,25 @@
       <version>${sqlite-jdbc.version}</version>
     </dependency>
 
+    <!-- ===== Java Faker (Test Data) ===== -->
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>${javafaker.version}</version>
+      <scope>compile</scope>
+    </dependency>
+
     <!-- ===== HTML Reporting ===== -->
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>${extentreports.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- ===== Logging ===== -->

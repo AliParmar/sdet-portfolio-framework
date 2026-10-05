@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/**
- * Page object for the Account Activity page.
- * Locators confirmed against live DOM via DevTools.
+/*
+ Page object for the Account Activity page.
+ Locators confirmed against live DOM via DevTools.
  */
 public class AccountActivityPage extends BasePage {
 

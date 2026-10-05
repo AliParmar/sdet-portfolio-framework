@@ -5,9 +5,9 @@ import org.testng.annotations.BeforeClass;
 
 import java.sql.SQLException;
 
-/**
- * Base class for JDBC database tests.
- * Builds and seeds the SQLite demo database once before the test class runs.
+/*
+ Base class for JDBC database tests.
+ Builds and seeds the SQLite demo database once before the test class runs.
  */
 public class BaseDbTest {
 

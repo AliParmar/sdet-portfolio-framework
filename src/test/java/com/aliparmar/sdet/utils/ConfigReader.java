@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Loads config.properties when class loads.
- * Provides simple getters so other framework classes can read config values.
+/*
+Loads config.properties when class loads.
+Provides simple getters so other framework classes can read config values.
 */
 public class ConfigReader {
 

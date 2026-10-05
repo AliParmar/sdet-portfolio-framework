@@ -4,9 +4,9 @@ import com.aliparmar.sdet.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Page object for the ParaBank login page (which is also the home page).
- * Holds all locators and actions for logging in.
+/*
+ Page object for the ParaBank login page (which is also the home page).
+ Holds all locators and actions for logging in.
  */
 public class LoginPage extends BasePage {
 

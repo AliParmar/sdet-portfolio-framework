@@ -7,11 +7,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * TestNG UI tests covering ParaBank's account-services features:
- * Open New Account, Request Loan, Update Contact Info, Bill Pay, and Log Out.
- * Each test logs in fresh (via BaseTest's per-method driver) then exercises
- * one page in isolation - complements the multi-page Cucumber journeys.
+/*
+ TestNG UI tests covering ParaBank's account-services features:
+ Open New Account, Request Loan, Update Contact Info, Bill Pay, and Log Out.
+ Each test logs in fresh (via BaseTest's per-method driver) then exercises
+ one page in isolation - complements the multi-page Cucumber journeys.
  */
 public class ParaBankAccountServicesTest extends BaseTest {
 
@@ -29,7 +29,7 @@ public class ParaBankAccountServicesTest extends BaseTest {
         navigationMenuPage = new NavigationMenuPage(driver);
     }
 
-    @Test(groups = {"sanity", "ui"}, description = "Opening a new Savings account from an existing account succeeds")
+    @Test(groups = {"sanity", "ui"}, description = "Opening a new Savings account from an existing account succeeds and the account is listed on Accounts Overview")
     public void verifyOpenNewSavingsAccountSucceeds() {
         OpenNewAccountPage openNewAccountPage = navigationMenuPage.goToOpenNewAccount();
         openNewAccountPage.selectAccountType("SAVINGS");
@@ -38,11 +38,17 @@ public class ParaBankAccountServicesTest extends BaseTest {
 
         Assert.assertTrue(
                 openNewAccountPage.isResultDisplayed(),
-                "Expected a confirmation result after opening a new account"
+                "Expected the 'Account Opened!' panel to be visible. Error panel displayed: "
+                        + openNewAccountPage.isErrorDisplayed()
         );
-        Assert.assertFalse(
-                openNewAccountPage.getNewAccountId().isBlank(),
-                "Expected a new account number to be returned"
+
+        String newAccountId = openNewAccountPage.getNewAccountId();
+        Assert.assertFalse(newAccountId.isBlank(), "Expected a new account number to be returned");
+
+        AccountsOverviewPage overview = new AccountsOverviewPage(driver).openFromMenu();
+        Assert.assertTrue(
+                overview.isAccountListed(newAccountId),
+                "Expected new account " + newAccountId + " to be listed on Accounts Overview"
         );
     }
 

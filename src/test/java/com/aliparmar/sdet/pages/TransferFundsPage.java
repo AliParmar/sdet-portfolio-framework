@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * Page object for the Transfer Funds page.
- * NOTE: locators reflect ParaBank's documented field ids. Confirm against the live DOM.
- * Accounts are selected by dropdown INDEX rather than hardcoded account numbers,
- * consistent with the framework's existing "don't hardcode account ids" decision.
+/*
+ Page object for the Transfer Funds page.
+ NOTE: locators reflect ParaBank's documented field ids. Confirm against the live DOM.
+ Accounts are selected by dropdown INDEX rather than hardcoded account numbers,
+ consistent with the framework's existing "don't hardcode account ids" decision.
  */
 public class TransferFundsPage extends BasePage {
 

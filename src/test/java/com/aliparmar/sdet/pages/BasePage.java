@@ -6,9 +6,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-/**
- * Parent class for all page objects.
- * Holds the WebDriver reference and provides common helpers like explicit waits.
+/*
+ Parent class for all page objects.
+ Holds the WebDriver reference and provides common helpers like explicit waits.
  */
 public class BasePage {
 

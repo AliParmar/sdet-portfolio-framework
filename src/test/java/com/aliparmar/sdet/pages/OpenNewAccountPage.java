@@ -1,21 +1,20 @@
 package com.aliparmar.sdet.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * Page object for the Open New Account page.
- * NOTE: locators below reflect ParaBank's documented markup (select#type,
- * select#fromAccountId, button#openAccountButton, div#openAccountResult).
- */
 public class OpenNewAccountPage extends BasePage {
 
     private static final By ACCOUNT_TYPE_DROPDOWN = By.id("type");
     private static final By FROM_ACCOUNT_DROPDOWN = By.id("fromAccountId");
+    private static final By FROM_ACCOUNT_OPTIONS = By.cssSelector("#fromAccountId option");
     private static final By OPEN_ACCOUNT_BUTTON = By.cssSelector("input[value='Open New Account']");
-    private static final By NEW_ACCOUNT_ID = By.id("newAccountId");
     private static final By OPEN_ACCOUNT_RESULT = By.id("openAccountResult");
+    private static final By OPEN_ACCOUNT_ERROR = By.id("openAccountError");
+    private static final By NEW_ACCOUNT_ID = By.id("newAccountId");
 
     public OpenNewAccountPage(WebDriver driver) {
         super(driver);
@@ -28,10 +27,10 @@ public class OpenNewAccountPage extends BasePage {
     }
 
     // Picks the first available "from" account without hardcoding an id,
-    // consistent with the framework's "don't hardcode account ids" decision.
     public OpenNewAccountPage selectFirstFromAccount() {
-        Select dropdown = new Select(waitForElementVisible(FROM_ACCOUNT_DROPDOWN));
-        dropdown.selectByIndex(0);
+        waitForElementVisible(FROM_ACCOUNT_DROPDOWN);
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(FROM_ACCOUNT_OPTIONS, 0));
+        new Select(driver.findElement(FROM_ACCOUNT_DROPDOWN)).selectByIndex(0);
         return this;
     }
 
@@ -39,11 +38,23 @@ public class OpenNewAccountPage extends BasePage {
         waitForElementClickable(OPEN_ACCOUNT_BUTTON).click();
     }
 
+    // True only if the "Account Opened!" panel actually becomes visible.
     public boolean isResultDisplayed() {
-        return !driver.findElements(OPEN_ACCOUNT_RESULT).isEmpty();
+        try {
+            waitForElementVisible(OPEN_ACCOUNT_RESULT);
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
+    // True if the page is showing its "Error!" panel (useful in failure messages).
+    public boolean isErrorDisplayed() {
+        return driver.findElement(OPEN_ACCOUNT_ERROR).isDisplayed();
+    }
+
+    // Reads the new account number from the result panel.
     public String getNewAccountId() {
-        return waitForElementVisible(NEW_ACCOUNT_ID).getText();
+        return waitForElementVisible(NEW_ACCOUNT_ID).getText().trim();
     }
 }

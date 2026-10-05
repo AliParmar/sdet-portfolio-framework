@@ -6,10 +6,10 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-/**
- * TestNG listener that logs every test into the ExtentReport automatically.
- * Creates one report entry per test and reuses it for the pass/fail result.
- */
+/*
+TestNG listener that logs every test into the ExtentReport automatically.
+Creates one report entry per test and reuses it for the pass/fail result.
+*/
 public class ExtentTestListener implements ITestListener {
 
     // Holds the current test entry per thread, so each test logs to its own node.

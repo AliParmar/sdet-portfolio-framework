@@ -3,6 +3,9 @@ Feature: Fund Transfer
   Verifies that moving money between two of a customer's own accounts
   is reflected correctly on both account balances.
 
+  Background:
+    Given I open the ParaBank home page
+
   @sanity
   Scenario: Transferring funds between two of my accounts updates both balances
     Given I log in with valid credentials

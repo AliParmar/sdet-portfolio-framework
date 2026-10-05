@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 
 import java.sql.*;
 
-/**
- * JDBC tests against the seeded SQLite demo database.
- * Demonstrates connection handling, parameterized queries, and result-set assertions.
+/*
+ JDBC tests against the seeded SQLite demo database.
+ Demonstrates connection handling, parameterized queries, and result-set assertions.
  */
 
 public class ParaBankDbTest extends BaseDbTest {

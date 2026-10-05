@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-/**
- * Base class for all UI test classes.
- * Creates a fresh WebDriver before each test and quits it after.
+/*
+ Base class for all UI test classes.
+ Creates a fresh WebDriver before each test and quits it after.
  */
 public class BaseTest {
 

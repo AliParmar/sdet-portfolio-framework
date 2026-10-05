@@ -5,6 +5,7 @@ import com.aliparmar.sdet.pages.LoginPage;
 import com.aliparmar.sdet.pages.NavigationMenuPage;
 import com.aliparmar.sdet.pages.RegisterPage;
 import com.aliparmar.sdet.utils.DriverContext;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,17 +13,25 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-/**
- * Step definitions for registration.feature.
- * Generates a unique username per run (via a timestamp) so repeated CI/local
- * runs against the shared ParaBank demo don't collide on an existing username.
- */
+/*
+Step definitions for registration.feature.
+Generates a unique username per run (via a timestamp) so repeated CI/local runs against the shared ParaBank demo don't collide on an existing username.
+*/
 public class RegistrationSteps {
 
     private WebDriver driver;
     private RegisterPage registerPage;
-    private String newUsername;
-    private final String newPassword = "Portfolio123!";
+    Faker faker = new Faker();
+    private final String newUsername = faker.name().username();
+    private final String newPassword = faker.random().hex(12);
+
+    public String getNewUsername(){
+        return newUsername;
+    }
+
+    public String getNewPassword(){
+        return newPassword;
+    }
 
     @Given("I navigate to the registration page")
     public void i_navigate_to_the_registration_page() {
@@ -32,7 +41,6 @@ public class RegistrationSteps {
 
     @And("I register a new customer with a unique username")
     public void i_register_a_new_customer_with_a_unique_username() {
-        newUsername = "sdetPortfolio" + System.currentTimeMillis();
         registerPage.fillRegistrationForm(newUsername, newPassword);
         registerPage.submit();
     }
@@ -40,8 +48,7 @@ public class RegistrationSteps {
     @Then("the registration should be confirmed")
     public void the_registration_should_be_confirmed() {
         Assert.assertTrue(
-                registerPage.isRegistrationConfirmed(),
-                "Expected a success confirmation after registering a new customer"
+        registerPage.isRegistrationConfirmed(), "New user account created successfully"
         );
     }
 
@@ -58,9 +65,6 @@ public class RegistrationSteps {
     @Then("I should land on the Accounts Overview page")
     public void i_should_land_on_the_accounts_overview_page() {
         AccountsOverviewPage overview = new AccountsOverviewPage(driver);
-        Assert.assertTrue(
-                overview.getPageTitle().contains("Accounts Overview"),
-                "Expected to land on Accounts Overview after logging in with the new account"
-        );
+        Assert.assertEquals(driver.getTitle(), "ParaBank | Accounts Overview", "Expected to land on Accounts Overview after logging in with the new account");
     }
 }

@@ -3,10 +3,9 @@ package com.aliparmar.sdet.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Page object for the Request Loan page.
- * NOTE: locators reflect ParaBank's documented field names/ids. Confirm against the live DOM.
- */
+
+ // Page object for the Request Loan page.
+
 public class RequestLoanPage extends BasePage {
 
     private static final By AMOUNT_FIELD = By.id("amount");
@@ -22,8 +21,7 @@ public class RequestLoanPage extends BasePage {
     public RequestLoanPage submitLoanRequest(String amount, String downPayment) {
         waitForElementVisible(AMOUNT_FIELD).sendKeys(amount);
         driver.findElement(DOWN_PAYMENT_FIELD).sendKeys(downPayment);
-        // Leave fromAccountId at its default selection (first account) rather
-        // than hardcoding an id.
+        // Leave fromAccountId at its default selection (first account)
         waitForElementClickable(APPLY_BUTTON).click();
         return this;
     }

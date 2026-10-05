@@ -8,10 +8,10 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Smoke tests for the ParaBank REST API.
- * Verifies the API is reachable and core endpoints return expected data.
- * Paths verified against the ParaBank service interface (parasoft/parabank on GitHub).
+/*
+ Smoke tests for the ParaBank REST API.
+ Verifies the API is reachable and core endpoints return expected data.
+ Paths verified against the ParaBank service interface (parasoft/parabank on GitHub).
  */
 
 public class ParaBankApiSmokeTest extends BaseApiTest {

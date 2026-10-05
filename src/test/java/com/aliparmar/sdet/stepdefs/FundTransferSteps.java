@@ -11,16 +11,12 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-/**
- * Step definitions for fund_transfer.feature.
- * "First"/"second" account refer to dropdown/table position (index 0/1),
- * matching the seeded demo data's account ordering - never a hardcoded
- * account number.
+/*
+After a transfer, ParaBank stays on the Transfer Funds page (it only swaps the form for a "Transfer Complete!" panel). Balances live on Accounts Overview, so the Then steps navigate there first via openFromMenu().
  */
 public class FundTransferSteps {
 
     private static final double DELTA = 0.001;
-
     private WebDriver driver;
     private String firstAccountNumber;
     private String secondAccountNumber;
@@ -31,7 +27,6 @@ public class FundTransferSteps {
     public void i_note_the_balances_of_my_first_and_second_accounts() {
         driver = DriverContext.getDriver();
         AccountsOverviewPage overview = new AccountsOverviewPage(driver);
-
         firstAccountNumber = overview.getAccountNumberAtIndex(0);
         secondAccountNumber = overview.getAccountNumberAtIndex(1);
         firstAccountBalanceBefore = overview.getBalanceForAccount(firstAccountNumber);
@@ -41,19 +36,17 @@ public class FundTransferSteps {
     @When("I transfer {double} from my first account to my second account")
     public void i_transfer_amount_from_my_first_account_to_my_second_account(double amount) {
         new NavigationMenuPage(driver).goToTransferFunds();
-
         TransferFundsPage transferFundsPage = new TransferFundsPage(driver);
         transferFundsPage.enterAmount(String.valueOf(amount));
         transferFundsPage.selectFromAccountByIndex(0);
         transferFundsPage.selectToAccountByIndex(1);
         transferFundsPage.submit();
-
         Assert.assertTrue(transferFundsPage.isTransferConfirmed(), "Expected a transfer confirmation");
     }
 
     @Then("my first account balance should decrease by {double}")
     public void my_first_account_balance_should_decrease_by(double amount) {
-        AccountsOverviewPage overview = new AccountsOverviewPage(driver);
+        AccountsOverviewPage overview = new AccountsOverviewPage(driver).openFromMenu();
         double actualBalance = overview.getBalanceForAccount(firstAccountNumber);
         Assert.assertEquals(
                 actualBalance, firstAccountBalanceBefore - amount, DELTA,
@@ -63,7 +56,7 @@ public class FundTransferSteps {
 
     @And("my second account balance should increase by {double}")
     public void my_second_account_balance_should_increase_by(double amount) {
-        AccountsOverviewPage overview = new AccountsOverviewPage(driver);
+        AccountsOverviewPage overview = new AccountsOverviewPage(driver).openFromMenu();
         double actualBalance = overview.getBalanceForAccount(secondAccountNumber);
         Assert.assertEquals(
                 actualBalance, secondAccountBalanceBefore + amount, DELTA,

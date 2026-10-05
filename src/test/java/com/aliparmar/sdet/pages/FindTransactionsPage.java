@@ -3,10 +3,10 @@ package com.aliparmar.sdet.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Page object for the Find Transactions page.
- * All four search types (ID, Date, Date Range, Amount) live on one page —
- * there are no tabs. Each has its own input and its own submit button.
+/*
+ Page object for the Find Transactions page.
+ All four search types (ID, Date, Date Range, Amount) live on one page —
+ there are no tabs. Each has its own input and its own submit button.
  */
 public class FindTransactionsPage extends BasePage {
 
@@ -36,19 +36,12 @@ public class FindTransactionsPage extends BasePage {
 
     // Enters an amount (e.g. "100.00", "$" stripped by the caller) and
     // clicks the "Find Transactions" button for the Amount search section.
-    // NOTE: id="amount"/id="findByAmount" follow the same naming pattern as
-    // the ID search fields above - verify against the live DOM if this fails.
     public void searchByAmount(String amount) {
         waitForElementVisible(AMOUNT_INPUT).sendKeys(amount);
         waitForElementClickable(FIND_BY_AMOUNT_BUTTON).click();
     }
 
     // Returns true if the results contain a link to the given transaction ID.
-    // Note: the Date column is not checked here — ParaBank displays a
-    // different date for the same transaction ID between the Transaction
-    // Details page and the Find Transactions results table (observed
-    // discrepancy: 07-14-2026 vs 07-13-2026 for the same transaction).
-    // Transaction ID alone is the reliable, unique identifier.
     public boolean resultsContainTransactionId(String transactionId) {
         By transactionLink = By.cssSelector("a[href*='id=" + transactionId + "']");
         return !driver.findElements(transactionLink).isEmpty();

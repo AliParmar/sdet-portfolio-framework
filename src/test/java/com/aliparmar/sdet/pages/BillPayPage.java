@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * Page object for the Bill Pay page.
- * NOTE: locators reflect ParaBank's documented field names
- * (payee.name, payee.address.street, etc).
+/*
+ Page object for the Bill Pay page.
+ NOTE: locators reflect ParaBank's documented field names
+ (payee.name, payee.address.street, etc).
  */
 public class BillPayPage extends BasePage {
 

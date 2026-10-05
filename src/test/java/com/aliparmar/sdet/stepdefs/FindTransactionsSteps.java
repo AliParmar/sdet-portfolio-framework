@@ -14,11 +14,10 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-/**
- * Step definitions for find_transactions.feature.
- * Carries state (account number, transaction ID, date) between steps
- * within a single scenario.
- */
+/*
+Step definitions for find_transactions.feature.
+Carries state (account number, transaction ID, date) between steps within a single scenario.
+*/
 public class FindTransactionsSteps {
 
     private WebDriver driver;

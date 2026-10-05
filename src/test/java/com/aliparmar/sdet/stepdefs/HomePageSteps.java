@@ -7,10 +7,10 @@ import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-/**
- * Step definitions for the ParaBank home page feature.
- * Each method matches a Gherkin step phrase in parabank_home.feature.
- */
+/*
+Step definitions for the ParaBank home page feature.
+Each method matches a Gherkin step phrase in parabank_home.feature.
+*/
 public class HomePageSteps {
 
     private WebDriver driver;

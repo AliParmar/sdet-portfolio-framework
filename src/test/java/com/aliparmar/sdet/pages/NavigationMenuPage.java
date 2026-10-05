@@ -3,11 +3,11 @@ package com.aliparmar.sdet.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Page object for the left-hand navigation menu present on every
- * authenticated ParaBank page (Accounts Overview, Transfer Funds, etc).
- * Centralizing these links here avoids duplicating menu locators across
- * every page object that needs to navigate away.
+/*
+ Page object for the left-hand navigation menu present on every
+ authenticated ParaBank page (Accounts Overview, Transfer Funds, etc).
+ Centralizing these links here avoids duplicating menu locators across
+ every page object that needs to navigate away.
  */
 public class NavigationMenuPage extends BasePage {
 
@@ -16,7 +16,7 @@ public class NavigationMenuPage extends BasePage {
     private static final By BILL_PAY_LINK = By.linkText("Bill Pay");
     private static final By UPDATE_CONTACT_INFO_LINK = By.linkText("Update Contact Info");
     private static final By REQUEST_LOAN_LINK = By.linkText("Request Loan");
-    private static final By LOG_OUT_LINK = By.linkText("Log Out");
+    private static final By LOG_OUT_LINK = By.cssSelector("[href='logout.htm']");
 
     public NavigationMenuPage(WebDriver driver) {
         super(driver);

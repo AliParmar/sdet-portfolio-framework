@@ -5,9 +5,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
 
-/**
- * Base class for all REST API test classes.
- * Sets the API base URI and default content type from config.
+/*
+ Base class for all REST API test classes.
+ Sets the API base URI and default content type from config.
  */
 public class BaseApiTest {
 

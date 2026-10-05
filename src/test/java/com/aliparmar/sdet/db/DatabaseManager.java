@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Manages a local SQLite database used to demonstrate JDBC testing.
- * Creates the database file, seeds sample banking data, and hands out connections.
+/*
+ Manages a local SQLite database used to demonstrate JDBC testing.
+ Creates the database file, seeds sample banking data, and hands out connections.
  */
 public class DatabaseManager {
 
