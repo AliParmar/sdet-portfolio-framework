@@ -37,6 +37,8 @@ These tests follow the money through ParaBank and chain each response into the n
 
 ## Running the Tests
 
+A sample report from a full regression run: [ExtentReport.html](https://aliparmar.github.io/sdet-portfolio-framework/sample-report/ExtentReport.html)
+
 The framework uses a "-Dsuite" flag to switch between TestNG suite profiles without touching pom.xml:
 
 - Full regression (all UI, API, DB, and Cucumber BDD tests - default)
