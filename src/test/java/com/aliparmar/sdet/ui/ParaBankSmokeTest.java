@@ -40,6 +40,7 @@ public class ParaBankSmokeTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver).open();
         loginPage.login(username, password);
         AccountsOverviewPage overviewPage = new AccountsOverviewPage(driver);
+        overviewPage.waitUntilLoaded();
         Assert.assertTrue(
                 overviewPage.getPageTitle().contains("ParaBank | Accounts Overview"),
                 "Expected page title to contain 'Accounts Overview' after successful login, but was: " + overviewPage.getPageTitle()

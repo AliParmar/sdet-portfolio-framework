@@ -1,5 +1,6 @@
 package com.aliparmar.sdet.pages;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,11 @@ public class AccountsOverviewPage extends BasePage {
 
     public AccountsOverviewPage(WebDriver driver) {
         super(driver);
+    }
+
+    public AccountsOverviewPage waitUntilLoaded() {
+        wait.until(ExpectedConditions.titleContains("Accounts Overview"));
+        return this;
     }
 
     public String getPageTitle() {
