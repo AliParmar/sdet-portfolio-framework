@@ -69,6 +69,10 @@ jobs:
           docker logs $(docker ps -aq --filter ancestor=parasoft/parabank) || true
           exit 1
 
+      - name: Initialize the ParaBank database
+        # A fresh container has no demo data, so john/demo does not exist until the DB is initialized.
+        run: curl -fsS -X POST http://localhost:8080/parabank/services/bank/initializeDB
+
       - name: Smoke-check the ParaBank REST API
         run: |
           echo "--- login as john/demo ---"
