@@ -23,4 +23,10 @@
         </classes>
     </test>
 
+    <test name="Smoke BDD Tests">
+        <classes>
+            <class name="com.aliparmar.sdet.runners.CucumberSmokeRunner"/>
+        </classes>
+    </test>
+
 </suite>

@@ -4,6 +4,7 @@ import com.aliparmar.sdet.pages.LoginPage;
 import com.aliparmar.sdet.pages.NavigationMenuPage;
 import com.aliparmar.sdet.pages.RegisterPage;
 import com.aliparmar.sdet.utils.DriverContext;
+import com.aliparmar.sdet.utils.ScenarioContext;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import com.aliparmar.sdet.utils.ScenarioContext;
 
 import java.time.Duration;
 
@@ -52,6 +54,12 @@ public class RegistrationSteps {
         registerPage.submit();
     }
 
+    private final ScenarioContext context;
+
+    public RegistrationSteps(ScenarioContext context) {
+        this.context = context;
+    }
+
     @Then("the registration should be confirmed")
     public void the_registration_should_be_confirmed() {
         Assert.assertTrue(
@@ -59,8 +67,9 @@ public class RegistrationSteps {
                 "Expected registration to be confirmed for user '" + newUsername
                         + "'. Right panel text was: " + registerPage.getPanelText()
         );
-    }
+        context.setCredentials(newUsername, newPassword);
 
+    }
     @When("I log out")
     public void i_log_out() {
         new NavigationMenuPage(driver).logOut();

@@ -5,10 +5,38 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: '0 8 * * *'        # nightly full regression, 08:00 UTC
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: 'Suite to run'
+        type: choice
+        options: [ ci, smoke, regression ]
+        default: ci
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: ${{ matrix.suite }} suite
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # push / pull_request -> ci and smoke | nightly schedule -> regression | manual run -> chosen suite
+        suite: ${{ fromJSON(github.event_name == 'schedule' && '["regression"]' || (github.event_name == 'workflow_dispatch' && format('["{0}"]', inputs.suite)) || '["ci","smoke"]') }}
+
+    # Every matrix job gets its own private ParaBank (official Parasoft image),
+    # so CI no longer depends on the shared public server or on other people's data.
+    services:
+      parabank:
+        image: parasoft/parabank
+        ports:
+          - 8080:8080
 
     steps:
       - name: Checkout code
@@ -27,26 +55,53 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: Wait for ParaBank to start
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fs http://localhost:8080/parabank/index.htm > /dev/null; then
+              echo "ParaBank is up after about $((i * 5)) seconds"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "ParaBank did not start within 5 minutes"
+          docker ps -a
+          docker logs $(docker ps -aq --filter ancestor=parasoft/parabank) || true
+          exit 1
+
+      - name: Smoke-check the ParaBank REST API
+        run: |
+          echo "--- login as john/demo ---"
+          curl -fsS -H "Accept: application/json" http://localhost:8080/parabank/services/bank/login/john/demo | tee login.json
+          echo
+          CUSTOMER_ID=$(jq -r '.id' login.json)
+          echo "--- accounts for customer ${CUSTOMER_ID} ---"
+          curl -fsS -H "Accept: application/json" "http://localhost:8080/parabank/services/bank/customers/${CUSTOMER_ID}/accounts"
+          echo
+
       - name: Prepare config.properties
         run: |
           mkdir -p src/test/resources/config
           cat <<EOF > src/test/resources/config/config.properties
-          base.url=${{ secrets.PARABANK_BASE_URL }}
-          api.base.url=${{ secrets.PARABANK_API_BASE_URL }}
-          test.username=${{ secrets.PARABANK_USERNAME }}
-          test.password=${{ secrets.PARABANK_PASSWORD }}
+          base.url=http://localhost:8080/parabank/index.htm
+          api.base.url=http://localhost:8080/parabank/services/bank
+          test.username=john
+          test.password=demo
           browser=chrome
           headless=true
           implicit.wait.seconds=10
           page.load.timeout.seconds=30
           EOF
 
-      - name: Run CI test suite
-        run: mvn test -Dsuite=ci
+      - name: Run ${{ matrix.suite }} test suite
+        run: mvn -B test -Dsuite=${{ matrix.suite }}
 
-      - name: Upload ExtentReport
+      - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: extent-report
-          path: target/extent-reports/ExtentReport.html
+          name: test-reports-${{ matrix.suite }}
+          path: |
+            target/extent-reports/
+            target/cucumber-reports/
+          if-no-files-found: warn
